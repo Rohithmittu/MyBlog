@@ -1,7 +1,8 @@
 import React from 'react'
 import {  useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-
+import { useState } from 'react'
+import { useEffect } from 'react'
 
 
 function Protected({children,authentication = true}) {
@@ -30,7 +31,7 @@ function Protected({children,authentication = true}) {
 
 
   return loader ? null : <>{children}</>;
-  
+
 }
 
 export default Protected
