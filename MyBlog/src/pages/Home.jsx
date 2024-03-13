@@ -40,7 +40,7 @@ function Home() {
         <div className='flex flex-wrap'>
           {posts.map((post) => (
             <div className='p-2 w-1/4' key={post.$id}>
-              <PostCard  {...post} />  // because we passes anobject in postcard so we pass it by destructuring
+              <PostCard  {...post} />  
             </div>
 
           ))}

@@ -73,7 +73,7 @@ export default function PostForm({ post }) {
   }, [watch, slugTransform, setValue]);
 
   return (
-    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">  // handleSubmit is from react-hook-form where submit is passed as an function
+    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap"> 
       <div className="w-2/3 px-2">
         <Input
           label="Title"
@@ -105,7 +105,7 @@ export default function PostForm({ post }) {
           label="Featured Image"
           type="file"
           className="mb-4"
-          accept="image/*"
+          accept="image/png, image/jpg, image/jpeg"
           {...register("image", { required: !post })}
         />
         {post && (

@@ -2,6 +2,7 @@ import React from "react";
 import { Controller } from "react-hook-form";
 import { Editor } from "@tinymce/tinymce-react";
 
+
 function RTE({ name, control, label, defaultValue = "" }) {
   return (
     <div>
@@ -11,6 +12,7 @@ function RTE({ name, control, label, defaultValue = "" }) {
         </label>
       )}
       <Controller
+        apiKey='494q23jntar0gxsjihyhk6c6jy6g8b7z2ogvur7w5ysm3nng'
         name={name || "content"}
         control={control}
         render={({ field: { onChange } }) => (
