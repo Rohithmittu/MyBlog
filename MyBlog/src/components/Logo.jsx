@@ -1,8 +1,8 @@
 import React from 'react'
 
-function Logo({width = "1100%"}) {
+function Logo({width = "100px"}) {
   return (
-    <img src=""  style={{width}} alt="Logo placehold" />
+    <img src="/myblog-high-resolution-logo.jpeg"  style={{width}} alt="Logo placehold" />
   )
 }
 
