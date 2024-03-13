@@ -1,13 +1,14 @@
-import React, { useState, useParams, useNavigate, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import appwriteService from "../appwrite/config";
 import Button from "../components/Button";
 import Container from "../components/container/Container";
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
+import { Link ,useParams,useNavigate } from "react-router-dom"
 
 function Post() {
   const [post, setPost] = useState(null);
-  const slug = useParams();
+  const {slug} = useParams();
   const navigate = useNavigate();
 
   const userData = useSelector((state) => state.auth.userData);
