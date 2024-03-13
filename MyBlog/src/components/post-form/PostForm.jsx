@@ -63,6 +63,7 @@ export default function PostForm({ post }) {
         .replace(/[^a-zA-Z\d\s]+/g, "-")
         .replace(/\s/g, "-");
   }, []);
+  
   React.useEffect(() => {
     watch((value, { name }) => {
       if (name === "title") {
@@ -72,7 +73,7 @@ export default function PostForm({ post }) {
   }, [watch, slugTransform, setValue]);
 
   return (
-    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
+    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">  // handleSubmit is from react-hook-form where submit is passed as an function
       <div className="w-2/3 px-2">
         <Input
           label="Title"
