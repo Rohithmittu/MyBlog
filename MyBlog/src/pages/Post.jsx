@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 
 function Post() {
   const [post, setPost] = useState(null);
-  const { slug } = useParams();
+  const slug = useParams();
   const navigate = useNavigate();
 
   const userData = useSelector((state) => state.auth.userData);
