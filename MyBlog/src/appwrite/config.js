@@ -1,5 +1,13 @@
 import conf from "../conf/conf";
-import { Client, Databases, Storage, Query, ID } from "appwrite";
+import {
+  Client,
+  Databases,
+  Storage,
+  Query,
+  ID,
+  Permission,
+  Role,
+} from "appwrite";
 
 export class Service {
   client = new Client();
@@ -19,7 +27,8 @@ export class Service {
       return await this.databases.getDocument(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
-        slug
+        slug,
+        Permission.read(Role.any())
       );
     } catch (error) {
       console.log("Appwrite service :: getPost() ::", error);
@@ -32,7 +41,8 @@ export class Service {
       return await this.databases.listDocuments(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
-        queries
+        queries,
+        // Permission.read(Role.any())
       );
     } catch (error) {
       console.log("Appwrite service :: getPosts() ::", error);
@@ -52,10 +62,11 @@ export class Service {
           featuredImage,
           status,
           userId,
-        }
+        },
+        // Permission.write(Role.any())
       );
     } catch (error) {
-      console.log("Appwrite service :: createPost() ::", error);
+      console.log("Appwrite service :: createPost() :: ", error);
       return false;
     }
   }
@@ -71,7 +82,8 @@ export class Service {
           content,
           featuredImage,
           status,
-        }
+        },
+        // Permission.update(Role.any())
       );
     } catch (error) {
       console.log("Appwrite service :: updateDocument() ::", error);
@@ -84,7 +96,8 @@ export class Service {
       await this.databases.deleteDocument(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
-        slug
+        slug,
+        // Permission.delete(Role.any())
       );
     } catch (error) {
       console.log("Appwrite service :: deleteDocument() ::", error);
@@ -99,7 +112,8 @@ export class Service {
       return await this.bucket.createFile(
         conf.appwriteBucketId,
         ID.unique(),
-        file
+        file,
+        Permission.write(Role.any())
       );
     } catch (error) {
       console.log("Appwrite service :: uploadFile() ::", error);
@@ -108,7 +122,11 @@ export class Service {
   }
   async deleteFile(fileId) {
     try {
-      return await this.bucket.deleteFile(conf.appwriteBucketId, fileId);
+      return await this.bucket.deleteFile(
+        conf.appwriteBucketId,
+        String(fileId)
+        // Permission.delete(Role.any())
+      );
     } catch (error) {
       console.log("Appwrite service :: deleteFile() ::", error);
       return false;
@@ -116,7 +134,8 @@ export class Service {
   }
 
   getFilePreview(fileId) {
-    return this.bucket.getFilePreview(conf.appwriteBucketId, toString(fileId)).href;
+    return this.bucket.getFilePreview(conf.appwriteBucketId, toString(fileId))
+      .href;
   }
 }
 
