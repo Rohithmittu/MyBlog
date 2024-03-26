@@ -14,7 +14,7 @@ function Login() {
   const { register, handleSubmit } = useForm();
   const [error, setError] = useState("");
 
-  
+
 
   const login = async (data) => {
     setError("");
@@ -24,10 +24,7 @@ function Login() {
       if (session) {
         const userData = await authService.getCurrentUser();
 
-        if (userData) {
-          dispatch(authLogin({ userData }));   // change acordingly if statement may curly braces may causes error
-        }
-
+        if (userData) dispatch(authLogin({ userData }));   // change acordingly if statement may curly braces may causes error
         navigate("/");
       }
     } catch (error) {

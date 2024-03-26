@@ -4,7 +4,7 @@ import Button from "../Button";
 import Input from "../Input";
 import RTE from "../RTE";
 import Select from "../Select";
-import appwriteSerice from "../../appwrite/config";
+import appwriteService from "../../appwrite/config";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -25,13 +25,13 @@ export default function PostForm({ post }) {
   const submit = async (data) => {
     if (post) {
       const file = data.image[0]
-        ? await appwriteSerice.uploadFile(data.image[0])
+        ? await appwriteService.uploadFile(data.image[0])
         : null;
 
       if (file) {
-        appwriteSerice.deleteFile(post.featuredImage);
+        appwriteService.deleteFile(post.featuredImage);
       }
-      const dbPost = await appwriteSerice.updatePost(post.$id, {
+      const dbPost = await appwriteService.updatePost(post.$id, {
         ...data,
         featuredImage: file ? file.$id : undefined,
       });
@@ -39,11 +39,11 @@ export default function PostForm({ post }) {
         navigate(`/post/${dbPost.$id}`);
       }
     } else {
-      const file = await appwriteSerice.uploadFile(data.image[0]);
+      const file = await appwriteService.uploadFile(data.image[0]);
       if (file) {
         const fileId = file.$id;
         data.featuredImage = fileId;
-        const dbPost = await appwriteSerice.createPost({
+        const dbPost = await appwriteService.createPost({
           ...data,
           userId: userData.$id,
         });
@@ -109,7 +109,7 @@ export default function PostForm({ post }) {
         {post && (
           <div className="w-full mb-4">
             <img
-              src={appwriteSerice.getFilePreview(post.featuredImage)}
+              src={appwriteService.getFilePreview(post.featuredImage)}
               alt={post.title}
               className="rounded-lg"
             />
